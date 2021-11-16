@@ -1,0 +1,96 @@
+<html>
+<head>
+<title>DashBoardActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+DashBoardActivity.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.medicalhistory</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">androidx.annotation.Nullable</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.appcompat.app.AppCompatActivity</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.recyclerview.widget.DividerItemDecoration</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.recyclerview.widget.LinearLayoutManager</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.recyclerview.widget.RecyclerView</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">android.app.Activity</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.content.Intent</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.os.strictmode.DiskReadViolation</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.View</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.Toast</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">com.google.android.material.floatingactionbutton.FloatingActionButton</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">DashBoardActivity </span><span class="s0">extends </span><span class="s1">AppCompatActivity {</span>
+    <span class="s0">private static final int </span><span class="s1">REQUEST_CODE = </span><span class="s2">0</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">ArrayList&lt;DiseaseEntry&gt; diseaseArrayList</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">DiseaseAdapter diseaseAdapter</span><span class="s0">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s0">;</span>
+        <span class="s1">setContentView(R.layout.activity_dash_board)</span><span class="s0">;</span>
+        <span class="s1">RecyclerView diseaseList = findViewById(R.id.diseaseList)</span><span class="s0">;</span>
+        <span class="s1">diseaseList.setLayoutManager(</span><span class="s0">new </span><span class="s1">LinearLayoutManager(</span><span class="s0">this</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">diseaseArrayList = </span><span class="s0">new </span><span class="s1">ArrayList&lt;DiseaseEntry&gt;()</span><span class="s0">;</span>
+        <span class="s1">diseaseAdapter = </span><span class="s0">new </span><span class="s1">DiseaseAdapter(diseaseArrayList)</span><span class="s0">;</span>
+        <span class="s1">diseaseList.setAdapter(diseaseAdapter)</span><span class="s0">;</span>
+        <span class="s1">FloatingActionButton addDiseaseItem = findViewById(R.id.addDiseaseItem)</span><span class="s0">;</span>
+        <span class="s1">addDiseaseItem.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View v) {</span>
+                <span class="s1">startAddDiseaseActivity()</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+        <span class="s1">Bundle extras = getIntent().getExtras()</span><span class="s0">;</span>
+        <span class="s0">if</span><span class="s1">(extras != </span><span class="s0">null</span><span class="s1">) {</span>
+            <span class="s1">diseaseArrayList.add((DiseaseEntry) getIntent().getSerializableExtra(</span><span class="s3">&quot;entry&quot;</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+    <span class="s0">public void </span><span class="s1">startAddDiseaseActivity() {</span>
+        <span class="s1">Intent intent = </span><span class="s0">new </span><span class="s1">Intent(</span><span class="s0">this, </span><span class="s1">AddDiseaseActivity.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">startActivityForResult(intent</span><span class="s0">, </span><span class="s1">REQUEST_CODE)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onActivityResult(</span><span class="s0">int </span><span class="s1">requestCode</span><span class="s0">, int </span><span class="s1">resultCode</span><span class="s0">, </span><span class="s1">@Nullable Intent data) {</span>
+        <span class="s0">super</span><span class="s1">.onActivityResult(requestCode</span><span class="s0">, </span><span class="s1">resultCode</span><span class="s0">, </span><span class="s1">data)</span><span class="s0">;</span>
+
+        <span class="s0">if</span><span class="s1">(requestCode == REQUEST_CODE) {</span>
+            <span class="s0">if</span><span class="s1">(resultCode == Activity.RESULT_OK) {</span>
+                <span class="s1">String diseaseName = data.getStringExtra(</span><span class="s3">&quot;diseaseName&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">String doctorName = data.getStringExtra(</span><span class="s3">&quot;doctorName&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">String hospitalName = data.getStringExtra(</span><span class="s3">&quot;hospitalName&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">String medicineName = data.getStringExtra(</span><span class="s3">&quot;medicineName&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">String hospitalAddress = data.getStringExtra(</span><span class="s3">&quot;hospitalName&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+                <span class="s1">DiseaseEntry toAdd = </span><span class="s0">new </span><span class="s1">DiseaseEntry()</span><span class="s0">;</span>
+                <span class="s1">toAdd.doctorName = doctorName</span><span class="s0">;</span>
+                <span class="s1">toAdd.diseaseName = diseaseName</span><span class="s0">;</span>
+                <span class="s1">toAdd.hospitalName = hospitalName</span><span class="s0">;</span>
+                <span class="s1">toAdd.medicineName = medicineName</span><span class="s0">;</span>
+                <span class="s1">toAdd.hospitalAddress = hospitalAddress</span><span class="s0">;</span>
+
+                <span class="s1">diseaseArrayList.add(toAdd)</span><span class="s0">;</span>
+                <span class="s1">diseaseAdapter.notifyItemInserted(diseaseArrayList.size() - </span><span class="s2">1</span><span class="s1">)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+<span class="s1">}</span></pre>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>MoreDetails.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MoreDetails.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.medicalhistory</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">androidx.appcompat.app.AppCompatActivity</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">android.content.Intent</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.View</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.Button</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">MoreDetails </span><span class="s0">extends </span><span class="s1">AppCompatActivity {</span>
+    <span class="s0">private </span><span class="s1">TextView dateTextView</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">TextView diseaseTextView</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">TextView doctorNameTextView</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">TextView hospitalNameTextView</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">TextView addressFieldTextView</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">TextView medicineFieldTextView</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Button addReminderButton</span><span class="s0">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s0">;</span>
+        <span class="s1">setContentView(R.layout.activity_more_details)</span><span class="s0">;</span>
+
+        <span class="s1">dateTextView = findViewById(R.id.dateTextView)</span><span class="s0">;</span>
+        <span class="s1">diseaseTextView = findViewById(R.id.diseaseTextView)</span><span class="s0">;</span>
+        <span class="s1">doctorNameTextView = findViewById(R.id.doctorTextView)</span><span class="s0">;</span>
+        <span class="s1">hospitalNameTextView = findViewById(R.id.hospitalTextView)</span><span class="s0">;</span>
+        <span class="s1">addressFieldTextView = findViewById(R.id.addressFieldTextView)</span><span class="s0">;</span>
+        <span class="s1">medicineFieldTextView = findViewById(R.id.medicineFieldTextView)</span><span class="s0">;</span>
+        <span class="s1">addReminderButton = findViewById(R.id.addReminderButton)</span><span class="s0">;</span>
+
+        <span class="s1">String date = getIntent().getStringExtra(</span><span class="s2">&quot;date&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String disease = getIntent().getStringExtra(</span><span class="s2">&quot;disease&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String doctor = getIntent().getStringExtra(</span><span class="s2">&quot;doctor&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String hospital = getIntent().getStringExtra(</span><span class="s2">&quot;hospital&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String address = getIntent().getStringExtra(</span><span class="s2">&quot;address&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">String medicine = getIntent().getStringExtra(</span><span class="s2">&quot;medicine&quot;</span><span class="s1">)</span><span class="s0">;</span>
+
+        <span class="s1">dateTextView.setText(</span><span class="s2">&quot;Date: &quot; </span><span class="s1">+ date)</span><span class="s0">;</span>
+        <span class="s1">diseaseTextView.setText(</span><span class="s2">&quot;Disease: &quot; </span><span class="s1">+ disease)</span><span class="s0">;</span>
+        <span class="s1">doctorNameTextView.setText(</span><span class="s2">&quot;Doctors Name: &quot; </span><span class="s1">+ doctor)</span><span class="s0">;</span>
+        <span class="s1">hospitalNameTextView.setText(</span><span class="s2">&quot;Hospital: &quot; </span><span class="s1">+ hospital)</span><span class="s0">;</span>
+        <span class="s1">addressFieldTextView.setText(address)</span><span class="s0">;</span>
+        <span class="s1">medicineFieldTextView.setText(medicine)</span><span class="s0">;</span>
+
+        <span class="s1">addReminderButton.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View v) {</span>
+                <span class="s1">startSetReminderActivity()</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+    <span class="s1">}</span>
+    <span class="s0">private void </span><span class="s1">startSetReminderActivity() {</span>
+        <span class="s1">Intent intent = </span><span class="s0">new </span><span class="s1">Intent(</span><span class="s0">this, </span><span class="s1">ReminderActivity.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">startActivity(intent)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>

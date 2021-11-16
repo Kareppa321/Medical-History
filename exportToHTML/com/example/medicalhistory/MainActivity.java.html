@@ -1,0 +1,137 @@
+<html>
+<head>
+<title>MainActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #6897bb;}
+.s4 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MainActivity.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com.example.medicalhistory</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">androidx.annotation.NonNull</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">androidx.appcompat.app.AppCompatActivity</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">android.content.Intent</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.text.TextUtils</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.view.View</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.Button</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.EditText</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.Toast</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">com.google.android.gms.tasks.OnCompleteListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.android.gms.tasks.Task</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.auth.AuthResult</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.google.firebase.auth.FirebaseAuth</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">MainActivity </span><span class="s0">extends </span><span class="s1">AppCompatActivity {</span>
+    <span class="s1">FirebaseAuth fAuth</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">EditText loginEmail</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">EditText loginPassword</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">Button logIn</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">TextView signUp</span><span class="s0">;</span>
+
+    <span class="s1">@Override</span>
+    <span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) {</span>
+        <span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s0">;</span>
+        <span class="s1">setContentView(R.layout.activity_main)</span><span class="s0">;</span>
+
+        <span class="s1">loginEmail = findViewById(R.id.emailEditText)</span><span class="s0">;</span>
+        <span class="s1">loginPassword = findViewById(R.id.passwordEditText)</span><span class="s0">;</span>
+        <span class="s1">logIn = findViewById(R.id.signInButton)</span><span class="s0">;</span>
+        <span class="s1">signUp = findViewById(R.id.signUpTextView)</span><span class="s0">;</span>
+
+        <span class="s1">logIn.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View v) {</span>
+                <span class="s1">String email = loginEmail.getText().toString().trim()</span><span class="s0">;</span>
+                <span class="s1">String password = loginPassword.getText().toString().trim()</span><span class="s0">;</span>
+
+                <span class="s0">if</span><span class="s1">(TextUtils.isEmpty(email)) {</span>
+                    <span class="s1">loginEmail.setError(</span><span class="s2">&quot;Email is Required...&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s0">return;</span>
+                <span class="s1">}</span>
+
+                <span class="s0">if</span><span class="s1">(TextUtils.isEmpty(password)) {</span>
+                    <span class="s1">loginEmail.setError(</span><span class="s2">&quot;Password is Required...&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s0">return;</span>
+                <span class="s1">}</span>
+
+                <span class="s0">if</span><span class="s1">(password.length() &lt; </span><span class="s3">7</span><span class="s1">) {</span>
+                    <span class="s1">loginPassword.setError(</span><span class="s2">&quot;Password must at least six characters&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">}</span>
+
+                <span class="s1">fAuth.signInWithEmailAndPassword(email</span><span class="s0">, </span><span class="s1">password).addOnCompleteListener(</span><span class="s0">new </span><span class="s1">OnCompleteListener&lt;AuthResult&gt;() {</span>
+                    <span class="s1">@Override</span>
+                    <span class="s0">public void </span><span class="s1">onComplete(@NonNull Task&lt;AuthResult&gt; task) {</span>
+                        <span class="s0">if</span><span class="s1">(task.isSuccessful()){</span>
+                            <span class="s1">Toast.makeText(MainActivity.</span><span class="s0">this, </span><span class="s2">&quot;Logged in successfully&quot;</span><span class="s0">, </span><span class="s1">Toast.LENGTH_SHORT).show()</span><span class="s0">;</span>
+                            <span class="s1">startActivity(</span><span class="s0">new </span><span class="s1">Intent(getApplicationContext()</span><span class="s0">, </span><span class="s1">DashBoardActivity.</span><span class="s0">class</span><span class="s1">))</span><span class="s0">;</span>
+                        <span class="s1">}</span><span class="s0">else </span><span class="s1">{</span>
+                            <span class="s1">Toast.makeText(MainActivity.</span><span class="s0">this, </span><span class="s2">&quot;Error! &quot;</span><span class="s1">+ task.getException().getMessage()</span><span class="s0">, </span><span class="s1">Toast.LENGTH_SHORT).show()</span><span class="s0">;</span>
+
+                        <span class="s1">}</span>
+                    <span class="s1">}</span>
+                <span class="s1">})</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+<span class="s4">//        signUp.setOnClickListener(new View.OnClickListener() {</span>
+<span class="s4">//            @Override</span>
+<span class="s4">//            public void onClick(View v) {</span>
+<span class="s4">//            }</span>
+<span class="s4">//        });</span>
+
+<span class="s4">//        signUp.setOnClickListener(new View.OnClickListener(){</span>
+<span class="s4">//            @override</span>
+<span class="s4">//                    public void onClick(View v) {</span>
+<span class="s4">//                startActivity(new Intent(getApplicationContext(), SignUpActivity.class));</span>
+<span class="s4">//            }</span>
+<span class="s4">//        });</span>
+
+        <span class="s1">signUp.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">onClick(View v) {</span>
+                <span class="s1">startActivity(</span><span class="s0">new </span><span class="s1">Intent(getApplicationContext()</span><span class="s0">, </span><span class="s1">SignUpActivity.</span><span class="s0">class</span><span class="s1">))</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+<span class="s4">//    signUp.setOnClickListener(new View.OnClickListener() {</span>
+<span class="s4">//        @Override</span>
+<span class="s4">//        public void onClick(View v) {</span>
+<span class="s4">//            startActivity(new Intent(getApplicationContext(), SignUpActivity.class));</span>
+<span class="s4">//        }</span>
+<span class="s4">//    });</span>
+
+
+
+
+    <span class="s0">public void </span><span class="s1">startSignUpActivity() {</span>
+        <span class="s1">Intent intent = </span><span class="s0">new </span><span class="s1">Intent(</span><span class="s0">this, </span><span class="s1">SignUpActivity.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">startActivity(intent)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">startDashBoardActivity() {</span>
+        <span class="s0">if</span><span class="s1">(loginEmail.getText().length() == </span><span class="s3">0 </span><span class="s1">|| loginPassword.getText().length() == </span><span class="s3">0</span><span class="s1">) {</span>
+            <span class="s1">Toast.makeText(</span><span class="s0">this, </span><span class="s2">&quot;Cannot leave fields empty&quot;</span><span class="s0">, </span><span class="s1">Toast.LENGTH_SHORT).show()</span><span class="s0">;</span>
+            <span class="s0">return;</span>
+        <span class="s1">}</span>
+        <span class="s1">Intent intent = </span><span class="s0">new </span><span class="s1">Intent(</span><span class="s0">this, </span><span class="s1">DashBoardActivity.</span><span class="s0">class</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">startActivity(intent)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span></pre>
+</body>
+</html>
