@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MoreDetails">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/detailsTextView"
+        android:text="Details"
+        android:textSize="32sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dateTextView"
+        android:text="Date: "
+        android:textSize="24sp"
+        android:layout_below="@+id/detailsTextView"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="12dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/diseaseTextView"
+        android:text="Disease: "
+        android:textSize="24sp"
+        android:layout_below="@+id/dateTextView"
+        android:layout_alignStart="@+id/dateTextView"
+        android:layout_marginTop="12dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/doctorTextView"
+        android:text="Doctors Name: "
+        android:textSize="24sp"
+        android:layout_below="@+id/diseaseTextView"
+        android:layout_alignStart="@+id/diseaseTextView"
+        android:layout_marginTop="12dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/hospitalTextView"
+        android:text="Hospital: "
+        android:textSize="24sp"
+        android:layout_below="@+id/doctorTextView"
+        android:layout_alignStart="@+id/doctorTextView"
+        android:layout_marginTop="12dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addressLabelTextView"
+        android:text="Address:"
+        android:textSize="24sp"
+        android:layout_below="@+id/hospitalTextView"
+        android:layout_alignStart="@id/hospitalTextView"
+        android:layout_marginTop="12dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addressFieldTextView"
+        android:text="Address appears here"
+        android:textSize="24sp"
+        android:layout_below="@+id/addressLabelTextView"
+        android:layout_alignStart="@+id/addressLabelTextView"
+        android:layout_marginTop="12dp"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/medicineLabelTextView"
+        android:text="Medicines: "
+        android:textSize="24sp"
+        android:layout_below="@+id/addressFieldTextView"
+        android:layout_alignStart="@+id/addressFieldTextView"
+        android:layout_marginTop="12dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/medicineFieldTextView"
+        android:text="Medicines appear here"
+        android:textSize="24sp"
+        android:layout_below="@+id/medicineLabelTextView"
+        android:layout_alignStart="@+id/medicineLabelTextView"
+        android:layout_marginTop="12dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/photoFAB"
+        android:src="@drawable/ic_baseline_photo_camera_24"
+        android:layout_above="@+id/addReminderButton"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="24dp"
+        android:layout_marginRight="24dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addReminderButton"
+        android:text="Add a reminder"
+        android:textSize="24sp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginHorizontal="16dp"/>
+
+
+</RelativeLayout>

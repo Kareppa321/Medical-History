@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "130294734773",
+    "project_id": "medical-history-af495",
+    "storage_bucket": "medical-history-af495.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130294734773:android:685caa0bb310fa423f03fc",
+        "android_client_info": {
+          "package_name": "com.example.medicalhistory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130294734773-sni5oju6csvpiditjdocb2ld19egsopc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBW93KXGVC-MJ6d_yf1ysOmJJMwQbYcOSM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130294734773-sni5oju6csvpiditjdocb2ld19egsopc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
